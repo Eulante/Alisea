@@ -127,7 +127,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Alisea.png" />
+    <Content Include="Alisea.scale-200.png" />
+    <Content Include="Assets\Alisea.png" />
     <Content Include="Assets\ground.gif" />
     <Content Include="Assets\poster.jpg" />
     <Content Include="Assets\poster1.jpg" />
