@@ -1,0 +1,17 @@
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\bin\x86\Debug\AliseaTorrent.dll
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\bin\x86\Debug\AliseaTorrent.pdb
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\bin\x86\Debug\AliseaTorrent.pri
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\AliseaTorrent.dll
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\AliseaTorrent.pdb
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\priconfig.xml
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\priconfig.xml.intermediate
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\layout.resfiles
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\layout.resfiles.intermediate
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\resources.resfiles
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\resources.resfiles.intermediate
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\pri.resfiles
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\pri.resfiles.intermediate
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\qualifiers.txt
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\qualifiers.txt.intermediate
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\obj\x86\Debug\AliseaTorrent.csprojResolveAssemblyReference.cache

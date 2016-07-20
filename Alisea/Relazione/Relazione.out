@@ -1,0 +1,42 @@
+\BOOKMARK [0][-]{chapter.1}{Prefazione}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Introduzione}{}% 2
+\BOOKMARK [0][-]{chapter.3}{Software utilizzati all'interno del progetto}{}% 3
+\BOOKMARK [0][-]{chapter.4}{Metodologia di sviluppo utilizzata}{}% 4
+\BOOKMARK [0][-]{chapter.5}{Il backend: Alisea Middle Service}{}% 5
+\BOOKMARK [1][-]{section.5.1}{Tecnologie e strumenti utilizzati}{chapter.5}% 6
+\BOOKMARK [2][-]{subsection.5.1.1}{Microsoft Azure}{section.5.1}% 7
+\BOOKMARK [2][-]{subsection.5.1.2}{ASP.NET MVC}{section.5.1}% 8
+\BOOKMARK [2][-]{subsection.5.1.3}{Entity Framework: Code First!}{section.5.1}% 9
+\BOOKMARK [2][-]{subsection.5.1.4}{Microsoft SQL Server}{section.5.1}% 10
+\BOOKMARK [2][-]{subsection.5.1.5}{SQLite}{section.5.1}% 11
+\BOOKMARK [2][-]{subsection.5.1.6}{LINQ}{section.5.1}% 12
+\BOOKMARK [1][-]{section.5.2}{Gestione e struttura del database}{chapter.5}% 13
+\BOOKMARK [2][-]{subsection.5.2.1}{Gestione del catalogo dei video e delle relative categorie: Microsoft SQL Server}{section.5.2}% 14
+\BOOKMARK [2][-]{subsection.5.2.2}{Gestione dei video preferiti dall'utente e delle relative preferenze da parte dell'utente: SQLite}{section.5.2}% 15
+\BOOKMARK [1][-]{section.5.3}{Creazione dei database}{chapter.5}% 16
+\BOOKMARK [2][-]{subsection.5.3.1}{Microsoft SQL Server:}{section.5.3}% 17
+\BOOKMARK [2][-]{subsection.5.3.2}{SQLite}{section.5.3}% 18
+\BOOKMARK [1][-]{section.5.4}{Comunicazione con i database}{chapter.5}% 19
+\BOOKMARK [2][-]{subsection.5.4.1}{Modifica e lettura dei video e delle categorie: Microsoft SQL Server}{section.5.4}% 20
+\BOOKMARK [2][-]{subsection.5.4.2}{Inserire video preferiti e apprezzamenti per essi: SQLServer}{section.5.4}% 21
+\BOOKMARK [0][-]{chapter.6}{Client Alisea: informazioni preliminari}{}% 22
+\BOOKMARK [1][-]{section.6.1}{Tecnologie}{chapter.6}% 23
+\BOOKMARK [2][-]{subsection.6.1.1}{Universal Windows Platform}{section.6.1}% 24
+\BOOKMARK [2][-]{subsection.6.1.2}{Codifica Bencode}{section.6.1}% 25
+\BOOKMARK [2][-]{subsection.6.1.3}{Programmazione asincrona, Async Task}{section.6.1}% 26
+\BOOKMARK [1][-]{section.6.2}{Il Protocollo BitTorrent}{chapter.6}% 27
+\BOOKMARK [2][-]{subsection.6.2.1}{Raccolta informazioni del torrent}{section.6.2}% 28
+\BOOKMARK [2][-]{subsection.6.2.2}{Comunicazione con i Tracker}{section.6.2}% 29
+\BOOKMARK [2][-]{subsection.6.2.3}{Comunicazione tra peer}{section.6.2}% 30
+\BOOKMARK [0][-]{chapter.7}{Client Alisea: Architettura e funzionamento}{}% 31
+\BOOKMARK [1][-]{section.7.1}{Alisea Torrent}{chapter.7}% 32
+\BOOKMARK [2][-]{subsection.7.1.1}{Insieme di classi Bencode}{section.7.1}% 33
+\BOOKMARK [2][-]{subsection.7.1.2}{Tracking Manager}{section.7.1}% 34
+\BOOKMARK [2][-]{subsection.7.1.3}{Peer Manager}{section.7.1}% 35
+\BOOKMARK [2][-]{subsection.7.1.4}{Data Store}{section.7.1}% 36
+\BOOKMARK [2][-]{subsection.7.1.5}{Alisea Core Torrent}{section.7.1}% 37
+\BOOKMARK [1][-]{section.7.2}{Alisea: applicazione client}{chapter.7}% 38
+\BOOKMARK [2][-]{subsection.7.2.1}{Homepage}{section.7.2}% 39
+\BOOKMARK [2][-]{subsection.7.2.2}{Pagina dei dettagli del video}{section.7.2}% 40
+\BOOKMARK [2][-]{subsection.7.2.3}{Pagina di riproduzione video}{section.7.2}% 41
+\BOOKMARK [0][-]{chapter.8}{Sviluppi futuri}{}% 42

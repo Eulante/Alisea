@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alisea.Theme">
+
+    <ResourceDictionary.ThemeDictionaries>
+        
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="AppBarColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="MenuColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="TextColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="MenuItemForeground" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="MenuItemForegroundSelected" Color="{ThemeResource SystemBaseHighColor}"/>
+        </ResourceDictionary>
+        
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="AppBarColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="MenuColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="TextColor" Color="{ThemeResource SystemBaseHighColor}"/>
+            <SolidColorBrush x:Key="MenuItemForeground" Color="#AFFF"/>
+            <SolidColorBrush x:Key="MenuItemForegroundSelected" Color="#FFFF"/>
+        </ResourceDictionary>
+        
+    </ResourceDictionary.ThemeDictionaries>
+    
+</ResourceDictionary>

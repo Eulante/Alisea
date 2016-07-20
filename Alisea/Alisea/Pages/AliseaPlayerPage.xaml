@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="Alisea.Pages.AliseaPlayerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alisea.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#FF27272C">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Background="#FF202025" BorderThickness="0">
+            <Button Name="BackButton" FontFamily="Segoe MDL2 Assets" Content="&#xE112;" FontSize="28" Background="Transparent" Click="BackButton_Click"/>
+            <TextBlock Name="AliseaTitle" Margin="20,0,0,0" x:Uid="AppName" VerticalAlignment="Center" Style="{StaticResource TextTitle}"/>
+        </StackPanel>
+
+
+        <Grid x:Name="contentsGrid" Grid.Row="1">
+            <MediaElement Name="Player" Stretch="Fill" AreTransportControlsEnabled="True"/>
+        </Grid>
+    </Grid>
+</Page>
