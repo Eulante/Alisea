@@ -164,13 +164,12 @@ namespace AliseaTorrent.Core
 
             public void OnPieceError(int pieceNumber)
             {
-                DebugPrinter.Print("PEZZO ERRATO: " + pieceNumber + "\n");
-                //throw new NotImplementedException();
+                core.peerManager.RequestData((int)pieceNumber);
             }
 
             public void OnMissingDataRequested(UInt64 dataOffset, UInt32 size)
             {
-                //core.peerManager.RequestData(dataOffset, size);
+
             }
 
             public void OnMissingDataRequested(ulong pieceNumber)
@@ -180,8 +179,6 @@ namespace AliseaTorrent.Core
 
             public void OnPieceCompleted(int pieceNumber)
             {
-
-                DebugPrinter.Print("PEZZO COMPLETO: " + pieceNumber + "\n");
                 core.peerManager.PieceCompleted(pieceNumber);
             }
         }

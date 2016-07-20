@@ -9,7 +9,9 @@ namespace AliseaTorrent.Data
     public interface IDataStoreEventListener
     {
         void OnMissingDataRequested(UInt64 pieceNumber);
+
         void OnPieceCompleted(Int32 pieceNumber);
+
         void OnPieceError(Int32 pieceNumber);
     }
 }

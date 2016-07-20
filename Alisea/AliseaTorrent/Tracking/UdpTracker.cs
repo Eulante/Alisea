@@ -160,13 +160,11 @@ namespace AliseaTorrent.Tracking
                 {
                     announceResponse = AnnounceResponse.BuildFromUdpTrackerResponse(reader);
                     responseOK = true;
-                }
-
-                
+                }                                
             }
             catch(Exception e)
             {
-                DebugPrinter.Print("SUPER MEGA ERRORE IN RICEZIONE\n" + e);
+                Debug.Write("Udp Tracker Receive Error\n" + e);
             }
 
         }
@@ -212,7 +210,6 @@ namespace AliseaTorrent.Tracking
                 this.connectionId = reader.ReadInt64();
                 success = true;
             }
-            
 
             return success;
         }

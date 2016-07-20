@@ -24,11 +24,10 @@ namespace AliseaTorrent.Tracking
         public override async Task<AnnounceResponse> RequestAnnounceAsync(AnnounceRequest Request)
         {
             string strRequest = AnnounceUrl + BuildAnnounceParam(Request);
-            Debug.Write("\nRequest: " + strRequest + "\n");
+
             Uri requestUri = new Uri(strRequest);
 
             AnnounceResponse announceResponse = null;
-
 
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = await httpClient.GetAsync(requestUri).AsTask();

@@ -153,7 +153,6 @@
     <Compile Include="Util\AliseaClienIdGenerator.cs" />
     <Compile Include="Util\AliseaPortGenerator.cs" />
     <Compile Include="Util\BufferCloner.cs" />
-    <Compile Include="Util\DebugPrinter.cs" />
     <Compile Include="Util\SHA1.cs" />
     <EmbeddedResource Include="Properties\AliseaTorrent.rd.xml" />
   </ItemGroup>

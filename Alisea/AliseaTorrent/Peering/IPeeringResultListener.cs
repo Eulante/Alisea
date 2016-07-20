@@ -10,6 +10,7 @@ namespace AliseaTorrent.Peering
     public interface IPeeringResultListener
     {
         void OnPeeringResult(DataTransferUnit data);
+
         DataTransferUnit GiveMeData(int pieceId, int offset, int size);
     }
 }

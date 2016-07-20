@@ -8,6 +8,6 @@ namespace AliseaTorrent.Tracking.Data
 {
     public class ScrapeRequest
     {
-        //TODO Scrape not Supported yetS
+        //TODO Scrape not Supported yet
     }
 }

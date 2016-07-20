@@ -16,10 +16,13 @@ namespace AliseaTorrent.Peering
 
         // this client is choking the peer
         public bool am_choking = true;
+
         // this client is interested in the peer
         public bool am_interested = false;
+
         // peer is choking this client
         public bool peer_choking = true;
+
         // peer is interested in this client
         public bool peer_interested = false;
 

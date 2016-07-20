@@ -32,7 +32,6 @@ namespace AliseaTorrent.Data.Concrete
 
 
 
-
         public void InitializeDataStore(TorrentMetaData torrent)
         {
             TorrentFilesInfo filesInfo = torrent.MetaInfo;
@@ -45,7 +44,7 @@ namespace AliseaTorrent.Data.Concrete
             for (int i = 0; i < pieceNumber; ++i)
                 pieces.Add(new Piece(pieceLength));
 
-            //TODO uninitialized variables (dafault false)
+
             requestedPieces = new bool[pieceNumber];
             completePieces = new bool[pieceNumber];
             
@@ -115,7 +114,7 @@ namespace AliseaTorrent.Data.Concrete
             return await Task.Run( async () =>
             {
                 Int64 pieceId = offset / pieceLength;
-                Debug.Write("Piece id: " + pieceId + "\n");
+
                 Int32 inOffset = (Int32)(offset % pieceLength);
 
                 Int32 neededPieces = 1;
@@ -128,15 +127,12 @@ namespace AliseaTorrent.Data.Concrete
 
                 if (pieceId + neededPieces > pieceNumber)
                     --neededPieces;
-
-                Debug.Write("\nNeeded pieces = " + neededPieces + "\n");
+                
 
                 /* Controllo presenza dati */
                 bool missingData = true;
                 while(missingData)
                 {
-                    Debug.Write("Try get " + pieceId + "\n");
-
                     int c = 0;
                     for (int i = 0; i < neededPieces; ++i)
                     {
@@ -150,8 +146,7 @@ namespace AliseaTorrent.Data.Concrete
                             {
                                 callbackListener.OnMissingDataRequested((UInt64)(pieceId+i));
                                 requestedPieces[pieceId + i] = true;
-                            }
-                               
+                            }                               
                         }
                     }
 
@@ -283,8 +278,8 @@ namespace AliseaTorrent.Data.Concrete
 
                 bitmask = null;
                 complete =  true;
+
                 return complete;
-                //return used >= size;
             }
 
 
@@ -294,11 +289,7 @@ namespace AliseaTorrent.Data.Concrete
                     data = new Byte[size];
 
                 if(bitmask == null)
-                {
                     bitmask = new Boolean[size];
-                    /*for (int i = 0; i < size; ++i)
-                        bitmask[i] = false;*/
-                }
 
                 Array.Copy(dataUnit.data, 0, data, dataUnit.inPieceOffset, dataUnit.data.Length);
                 used += (UInt32)dataUnit.data.Length;

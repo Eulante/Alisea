@@ -29,6 +29,8 @@ namespace AliseaTorrent.Peering
         private bool valid = true;
 
 
+
+
         public PeerMessenger(Peer peer, StreamSocket socket)
         {
             this.peer = peer;
@@ -94,6 +96,7 @@ namespace AliseaTorrent.Peering
 
             return size;
         }
+
 
 
         async void StreamListenTask(StreamSocket socket)
@@ -245,17 +248,14 @@ namespace AliseaTorrent.Peering
 
                     reader.DetachStream();
                 }
-
-                
-
             }
             catch (Exception e)
             {
-                Debug.Write("QUI VALIDITA': " + e);
+                Debug.Write(e);
                 valid = false;
-                //await socket.CancelIOAsync();
             }
         }
+
 
 
         public async Task<int> ListenHandshake()
@@ -315,15 +315,12 @@ namespace AliseaTorrent.Peering
 
         // Mantain the connection alive
         public async void KeepAliveMessage()
-        {
-
+        {        
             DataWriter writer = new DataWriter(socket.OutputStream);
             writer.ByteOrder = ByteOrder.BigEndian;
             writer.WriteInt32(0);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Keep Alive send\n");
         }
 
         // Choke the destination peer
@@ -335,8 +332,6 @@ namespace AliseaTorrent.Peering
             writer.WriteByte(0);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Choke send\n");
         }
 
         // Unchoke the destination peer
@@ -349,8 +344,6 @@ namespace AliseaTorrent.Peering
             writer.WriteByte(1);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Unchoke send\n");
         }
 
         // Set interest to the destination peer
@@ -363,8 +356,6 @@ namespace AliseaTorrent.Peering
             writer.WriteByte(2);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Interested send\n");
         }
 
         // Remove interest in the destination peer
@@ -377,8 +368,6 @@ namespace AliseaTorrent.Peering
             writer.WriteByte(3);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Not Interested send\n");
         }
 
         // Notify to destination an owned piece id
@@ -392,8 +381,6 @@ namespace AliseaTorrent.Peering
             writer.WriteInt32(pieceIndex);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Have send\n");
         }
 
         // Include all the owned pieces
@@ -415,8 +402,6 @@ namespace AliseaTorrent.Peering
             writer.WriteInt32(size);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Request send: " + socket.Information.RemoteAddress + " + pid:" + pieceIndex + " begin:" + begin + " size:" + size + "\n");
         }
 
         // Send a piece's block (after a request)
@@ -432,8 +417,6 @@ namespace AliseaTorrent.Peering
             writer.WriteBytes(dataUnit.data);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Piece send\n");
         }
 
         // Cancel a piece request
@@ -449,8 +432,6 @@ namespace AliseaTorrent.Peering
             writer.WriteInt32(size);
             await WriterStoreAndFlush(writer);
             writer.DetachStream();
-
-            Debug.Write("Cancel send\n");
         }
 
 
@@ -458,6 +439,7 @@ namespace AliseaTorrent.Peering
         {
             
         }
+
 
         public bool IsChocking()
         {

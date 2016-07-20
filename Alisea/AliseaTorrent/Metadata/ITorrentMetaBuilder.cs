@@ -9,6 +9,7 @@ namespace AliseaTorrent.Metadata
     interface ITorrentMetaBuilder
     {
         TorrentMetaData GetTorrentMetaData(string metaFileUrl);
+
         TorrentMetaData GetTorrentMetaData(Byte[] metadataByteArray);
     }
 }

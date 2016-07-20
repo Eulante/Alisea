@@ -45,14 +45,6 @@ namespace AliseaTorrent.Metadata
 
             BencodeDictionary dataDictionary = (BencodeDictionary)bencodeTorrent.DictionaryInfo;
 
-#if DEBUG
-            List<BencodeElement> ll = dataDictionary.Elements;
-            if (ll == null)
-                Debug.Write("\nNULL LISTA NULL\n");
-#endif
-
-
-
             foreach (BencodeElement element in dataDictionary.Elements)
             {
                 switch (element.Key)
