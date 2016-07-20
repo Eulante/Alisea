@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="AliseaMiddleServiceContext-Web.config Connection String" description="AliseaMiddleServiceContext Stringa di connessione utilizzata in web.config per l'accesso al database da parte dell'applicazione." defaultValue="Data Source=aliseaserver.database.windows.net;Initial Catalog=alisea;User ID=manetta;Password=Pistacchio1" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Gabriele\\Source\\Repos\\Alisea\\AliseaMiddleService\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AliseaMiddleServiceContext']/@connectionString" />
+  </parameter>
+</parameters>
