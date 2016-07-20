@@ -102,9 +102,6 @@ namespace AliseaTorrent.Peering
 
         int socketPort;
 
-        // Used to manage the socket's inputstream listening
-        bool continueListeningFromSocketInputStream = true;
-
         // Listening task (listen from socket input stream
         List<Task> listeningTask = null;
 

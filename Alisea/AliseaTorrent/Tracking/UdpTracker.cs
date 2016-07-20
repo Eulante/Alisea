@@ -108,7 +108,7 @@ namespace AliseaTorrent.Tracking
                 }
                 catch (Exception e)
                 {
-                    DebugPrinter.Print("ERRORONE ");
+                    Debug.Write("Announce Request Error: " + e);
                 }
 
                
