@@ -1,2 +1,0 @@
-C:\Users\Gabriele\Source\Repos\Alisea\Alisea\Alisea\Alisea.csproj;x86
-C:\Users\Gabriele\Source\Repos\Alisea\Alisea\AliseaTorrent\AliseaTorrent.csproj;x86
