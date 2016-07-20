@@ -226,17 +226,11 @@ namespace AliseaTorrent.Peering
 
             while(continueExchange)
             {
-                //bool somethingHappen = false;
-
-                //DebugPrinter.Print("non bloccato\n");
-
                 //AGGIUNTA RICHIESTE IN CODA
                 bool op = AddPieceRequests();
-                //somethingHappen = somethingHappen || op;
 
                 //RICHIESTE PACCHETTI
                 op = SendBlockRequests();
-                //somethingHappen = somethingHappen || op;
 
 
                 //RISPOSTE PACCHETTI
@@ -249,24 +243,20 @@ namespace AliseaTorrent.Peering
                     somethingHappen = true;
                 }
                 */
-
-                //if (!somethingHappen)
+                
                 await Task.Delay(TimeSpan.FromMilliseconds(5));
                 
             }
         }
 
 
-
-
         private bool AddPieceRequests()
         {
             bool somethingHappen = false;
             bool ownerFound = false;
-            //int steps = 0;
             bool moveNextRequest = true;
+            
 
-            //while (addedBlockRequst numberOfRequest < MAX_SLIDING_WINDOW_SIZE)
             while (addedBlockRequst < MAX_PENDING_BLOCK_REQUEST)
             {
                 bool idFound = false;
@@ -278,21 +268,6 @@ namespace AliseaTorrent.Peering
                     // Troviamo un pezzo mancante
                     if (pieceStatus[idx] == (int)PieceState.Missing)
                     {
-                        /*
-                        
-                        messengersMutex.WaitOne();
-
-                        //prendiamo la lista dei peer che hanno il piece e non ci strozzano
-                        var owners = peerStreamSockets.Where(ownsock => (!ownsock.Value.IsChocking() && ownsock.Value.OwnPiece(idx))).ToList();
-
-                        messengersMutex.ReleaseMutex();
-
-                        // se nessuno ha quel pezzo usciamo e proviamo a cercarne un altro
-                        if (owners.Count() == 0)
-                            break;
-
-                        */
-
                         int count = 0;
 
                         ownersMutex.WaitOne();
@@ -312,7 +287,6 @@ namespace AliseaTorrent.Peering
                         pieceStatus[idx] = (int)PieceState.Requested;
 
                         // creiamo le richieste diblocchi da effettuare
-                        //List<BlockRequest> blockRequests = new List<BlockRequest>();
                         blockRequestMutex.WaitOne();
 
                         int added = 0;
@@ -323,9 +297,8 @@ namespace AliseaTorrent.Peering
                             int addsize = MAX_BLOCK_SIZE;
                             if (pieceSize < added + addsize)
                                 addsize = pieceSize - added;
-
-                            //blockRequests.Add(new BlockRequest() { pieceId = idx, offset = added, size = addsize, responseWaiting = false, peerMessenger = owners[rid].Value});
-                            BlockRequest block = new BlockRequest() { pieceId = idx, offset = added, size = addsize, responseWaiting = false }; /*, peerMessenger = owners[rid].Value */
+                            
+                            BlockRequest block = new BlockRequest() { pieceId = idx, offset = added, size = addsize, responseWaiting = false };
                             if(!currentRequestedBlocks.ContainsKey(block.GetId()))
                                 currentRequestedBlocks.Add(block.GetId(), block);
 
@@ -335,27 +308,10 @@ namespace AliseaTorrent.Peering
                         }
 
                         blockRequestMutex.ReleaseMutex();
-                        // mandiamo le richieste ai peer
-                        /*int rid = 0;
-                        foreach(BlockRequest br in blockRequests)
-                        {
-                            try
-                            {
-                                owners[rid % owners.Count].Value.RequestMessage(br.pieceId, br.offset, br.size);
-                            }
-                            catch(Exception e)
-                            {
-                                DebugPrinter.Print("ERRORE DURANTE RICHIESTA");
-                            }
-                            
-                            ++rid;
-                        }*/
-
 
                         ++numberOfRequest;
                         ++requestCounter;
                         somethingHappen = true;
-
 
                         // se abbiamo trovato un piece da richiedere non ne richiediamo altri (per questo giro)
                         idFound = true;
@@ -376,52 +332,6 @@ namespace AliseaTorrent.Peering
                 if (moveNextRequest)
                     nextRequest = (nextRequest + 1) % pieceStatus.Count();
 
-
-                #region OLD
-                /*foreach (IPeerMessenger peer in piecesOwners[idx])
-                {
-                    if (peer != null)
-                    {
-                        if (!peer.IsChocking())
-                        {
-                            pieceStatus[idx] = (int)PieceState.Requested;
-
-                            int added = 0;
-                            int total = pieceSize;
-
-                            while (added < pieceSize)
-                            {
-                                int addsize = MAX_BLOCK_SIZE;
-                                if (pieceSize < added + addsize)
-                                    addsize = pieceSize - added;
-
-                                BlockRequest block = new BlockRequest() { pieceId = idx, offset = added, size = addsize, responseWaiting = false };
-                                currentRequestedBlocks.Add(block.GetId(), block);
-                                added += addsize;
-                            }
-
-                            ++numberOfRequest;
-                            ++requestCounter;
-
-                            ownerFound = true;
-                            somethingHappen = true;
-
-                            break;
-                        }
-                    }
-
-                }
-
-                moveNextRequest = moveNextRequest && ownerFound;
-
-                if (moveNextRequest)
-                    ++nextRequest;
-
-                ++steps;
-                if (steps == pieceStatus.Count())
-                    break;*/
-
-                #endregion
             }
 
             return somethingHappen;
@@ -506,55 +416,6 @@ namespace AliseaTorrent.Peering
 
             return somethingHappen;
 
-            #region OLD
-            /*            bool somethingHappen = false;
-
-                        List<BlockRequest> reqs = currentRequestedBlocks.Values.ToList();
-
-                        foreach (BlockRequest req in reqs)
-                        {
-                            if (pendingBlockRequest >= MAX_PENDING_BLOCK_REQUEST)
-                                break;
-
-
-
-                            if (!req.responseWaiting)
-                            {
-                                int idx = req.pieceId;
-
-                                List<IPeerMessenger> owners = piecesOwners[idx];
-                                List<IPeerMessenger> winners = new List<IPeerMessenger>();
-
-                                foreach (IPeerMessenger peer in owners)
-                                    if (!peer.IsChocking())
-                                        winners.Add(peer);
-
-                                if (winners.Count() > 0)
-                                {
-                                    int index = requestCounter % winners.Count();
-                                    IPeerMessenger peer = winners[index];
-
-                                    peer.RequestMessage(idx, req.offset, req.size);
-
-                                    ++pendingBlockRequest;
-                                    ++requestCounter;
-
-                                    somethingHappen = true;
-
-                                    BlockRequest blr = req;
-                                    blr.responseWaiting = true;
-                                    currentRequestedBlocks.Remove(req.GetId());
-                                    currentRequestedBlocks.Add(req.GetId(), blr);
-
-                                }
-
-                            }
-
-                        }
-
-                        return somethingHappen;
-            */
-            #endregion
         }
 
 
@@ -576,7 +437,6 @@ namespace AliseaTorrent.Peering
 
                 messengersMutex.ReleaseMutex();
 
-
                 await Task.Delay(TimeSpan.FromSeconds(60));
             }
         }
@@ -590,8 +450,7 @@ namespace AliseaTorrent.Peering
         async void UpdateSocketListRoutine()
         {
             while(continueExchange)
-            {
-                
+            {            
                 messengersMutex.WaitOne();
 
                 try
@@ -600,11 +459,9 @@ namespace AliseaTorrent.Peering
                         peerStreamSockets.Remove(badItem.Key);
 
                     numberOfConnection = peerStreamSockets.Count();
-
-                    DebugPrinter.Print("ACTIVE CONNECTION: " + numberOfConnection);
+                    
                 }
                 catch (Exception) { }
-
 
                 messengersMutex.ReleaseMutex();
 
@@ -626,8 +483,6 @@ namespace AliseaTorrent.Peering
             Task.Run(() => KeepAliveRoutine());
             Task.Run(() => UpdateSocketListRoutine());
         }
-
-
 
 
         public void StopPeerCommunication()
@@ -664,7 +519,6 @@ namespace AliseaTorrent.Peering
         public void Reset()
         {
             StopPeerCommunication();
-            // TODO to be completed
         }
 
 
@@ -672,30 +526,6 @@ namespace AliseaTorrent.Peering
         {
             --numberOfRequest;
             pieceStatus[pid] = (byte)PieceState.Owned;
-
-            /*
-            List<BlockRequest> cancelRequests = new List<BlockRequest>();
-
-            int added = 0;
-            int total = pieceSize;
-            while (added < pieceSize)
-            {
-                int addsize = MAX_BLOCK_SIZE;
-                if (pieceSize < added + addsize)
-                    addsize = pieceSize - added;
-                
-                BlockRequest block = new BlockRequest() { pieceId = pid, offset = added, size = addsize, responseWaiting = false };
-                added += addsize;
-            }
-
-            messengersMutex.WaitOne();
-
-            foreach (IPeerMessenger peer in peerStreamSockets.Values.ToList())
-                foreach (BlockRequest block in cancelRequests)
-                    peer.CancelMessage(block.pieceId, block.offset, block.size);
-
-            messengersMutex.ReleaseMutex();
-            */
         }
 
         #endregion
@@ -728,14 +558,12 @@ namespace AliseaTorrent.Peering
                 peerMessenger.InterestedMessage();
                 peerMessenger.UnchokeMessage();
 
-                //listeningTask.Add(listenTask);
-
-                DebugPrinter.Print("Connessione RIUSCITA\n");
+                Debug.Write("Connessione RIUSCITA\n");
 
             }
             catch (Exception)
             {
-                //Debug.Write("Connessione fallita\n");
+                Debug.Write("Connessione fallita\n");
             }
 
         }
@@ -792,16 +620,13 @@ namespace AliseaTorrent.Peering
                         peerManager.piecesOwners[idx].Add(sender);
                 }
 
-                DebugPrinter.Print("BitfieldMessage\n");
-
                 peerManager.ownersMutex.ReleaseMutex();
             }
 
 
             public void CancelMessage(PeerMessenger sender, int pieceIndex, int begin, int size)
             {
-                DebugPrinter.Print("CancelMessage\n");
-                
+
                 foreach (BlockRequest r in peerManager.incomingRequests)
                     if (r.peerMessenger.Equals(sender))
                         if (r.pieceId == pieceIndex && r.offset == begin && r.size == size)
@@ -822,16 +647,12 @@ namespace AliseaTorrent.Peering
 
             public void RequestMessage(PeerMessenger sender, int pieceIndex, int begin, int size)
             {
-                DebugPrinter.Print("RequestMessage\n");
-
                 peerManager.incomingRequests.Add(new BlockRequest() { peerMessenger = sender, pieceId = pieceIndex, offset = begin, size = size });
             }
 
             
             public void PieceMessage(PeerMessenger sender, DataTransferUnit dataUnit)
             {
-                DebugPrinter.Print("PieceMessage pid:" + dataUnit.pieceId + " start:" + dataUnit.inPieceOffset + " size:" + dataUnit.data.Length + "\n");
-
                 peerManager.resultListener.OnPeeringResult(dataUnit);
 
                 BlockRequest request = new BlockRequest() { pieceId = dataUnit.pieceId, offset = dataUnit.inPieceOffset };
@@ -840,43 +661,20 @@ namespace AliseaTorrent.Peering
                 peerManager.blockRequestMutex.ReleaseMutex();
                 --peerManager.pendingBlockRequest;
 
-                /*if(peerManager.currentRequestedBlocks.TryGetValue(request.GetId(), out request))
-                {
-                    if (request.offset == peerManager.pieceSize)
-                    {
-                        --peerManager.numberOfRequest;
-                        peerManager.currentRequestedBlocks.Remove(request.GetId());
-                        
-                    }                        
-                    else
-                    {
-                        int size = MAX_BLOCK_SIZE;
-                        if (size > peerManager.pieceSize - request.offset)
-                            size = peerManager.pieceSize - request.offset;
-
-                        //sender.RequestMessage(request.pieceId, request.offset, size);
-
-                        request.offset += size;
-                        peerManager.currentRequestedBlocks.Remove(request.GetId());
-                        request.responseWaiting = false;
-                        peerManager.currentRequestedBlocks.Add(request.GetId(), request);
-
-                    }
-                }*/
             }
 
 
-            public void KeepAliveMessage(PeerMessenger sender) { DebugPrinter.Print("KeepAliveMessage: " + sender.peer.Address + "\n"); }
+            public void KeepAliveMessage(PeerMessenger sender) { }
 
-            public void ChokeMessage(PeerMessenger sender) { DebugPrinter.Print("ChokeMessage: " + sender.peer.Address + "\n"); }
+            public void ChokeMessage(PeerMessenger sender) { }
 
-            public void UnchokeMessage(PeerMessenger sender) { DebugPrinter.Print("UnchokeMessage: " + sender.peer.Address + "\n"); }
+            public void UnchokeMessage(PeerMessenger sender) { }
 
-            public void InterestedMessage(PeerMessenger sender) { DebugPrinter.Print("InterestedMessage: " + sender.peer.Address + "\n"); }
+            public void InterestedMessage(PeerMessenger sender) { }
 
-            public void NotInterestedMessage(PeerMessenger sender) { DebugPrinter.Print("NotInterestedMessage: " + sender.peer.Address + "\n"); }
+            public void NotInterestedMessage(PeerMessenger sender) { }
 
-            public void PortMessage() { DebugPrinter.Print("PortMessage\n"); }
+            public void PortMessage() { }
 
         }
 

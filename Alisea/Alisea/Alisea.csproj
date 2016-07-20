@@ -93,8 +93,6 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="ApplicationInsights.config" />
-    <None Include="interstellar.torrent" />
-    <None Include="patta.torrent" />
     <None Include="project.json" />
     <None Include="Alisea_TemporaryKey.pfx" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
